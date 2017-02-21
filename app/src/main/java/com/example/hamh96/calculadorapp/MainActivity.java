@@ -188,9 +188,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void writeBdot(View view) {
-        if(prevDigit.equals("=")){
+        if(!(prevDigit.equals("."))) {
             texto += ".";
             prevDigit = ".";
+            acumul += ".";
             editorTexto.setText(texto);
         }
     }
