@@ -15,7 +15,8 @@ public class MainActivity extends AppCompatActivity {
     private Double result=0.0;
     private String acumul="";
     private String operation="";
-    private int flagEqual=0;
+    private Boolean flagDot=false;
+    private Boolean flagEqual=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,18 +70,20 @@ public class MainActivity extends AppCompatActivity {
         if (!(texto.equals(""))&&!(prevDigit.equals("+"))&&!(prevDigit.equals("-"))&&!(prevDigit.equals("*"))&&!(prevDigit.equals("/"))&&!(prevDigit.equals("."))){
             texto += "+";
             prevDigit="+";
-            if(flagEqual==1) {
+            flagDot=false;
+            operation="sum";
+            if(flagEqual) {
                 oper2=Double.parseDouble(acumul);
                 result=oper1+oper2;
                 texto=Double.toString(result);
                 texto+="+";
                 oper1=result;
             }
-            else if(flagEqual==0){
+            else{
                 oper1 = Double.parseDouble(acumul);
             }
             editorTexto.setText(texto);
-            flagEqual=1;
+            flagEqual=true;
             acumul="";
         }
     }
@@ -128,11 +131,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void writeBsustract(View view) {
-        acumul="";
         if (!(texto.equals(""))&&!(prevDigit.equals("+"))&&!(prevDigit.equals("-"))&&!(prevDigit.equals("*"))&&!(prevDigit.equals("/"))&&!(prevDigit.equals("."))) {
             texto += "-";
             prevDigit="-";
+            flagDot=false;
+            operation="sus";
+            if(flagEqual) {
+                oper2=Double.parseDouble(acumul);
+                result=oper1-oper2;
+                texto=Double.toString(result);
+                texto+="-";
+                oper1=result;
+            }
+            else{
+                oper1 = Double.parseDouble(acumul);
+            }
             editorTexto.setText(texto);
+            flagEqual=true;
+            acumul="";
         }
     }
 
@@ -179,20 +195,34 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void writeBmulti(View view) {
-        acumul="";
         if (!(texto.equals(""))&&!(prevDigit.equals("+"))&&!(prevDigit.equals("-"))&&!(prevDigit.equals("*"))&&!(prevDigit.equals("/"))&&!(prevDigit.equals("."))) {
             texto += "*";
             prevDigit="*";
+            flagDot=false;
+            operation="mul";
+            if(flagEqual) {
+                oper2=Double.parseDouble(acumul);
+                result=oper1*oper2;
+                texto=Double.toString(result);
+                texto+="*";
+                oper1=result;
+            }
+            else{
+                oper1 = Double.parseDouble(acumul);
+            }
             editorTexto.setText(texto);
+            flagEqual=true;
+            acumul="";
         }
     }
 
     public void writeBdot(View view) {
-        if(!(prevDigit.equals("."))) {
+        if(!(prevDigit.equals("."))&&!flagDot) {
             texto += ".";
             prevDigit = ".";
             acumul += ".";
             editorTexto.setText(texto);
+            flagDot=true;
         }
     }
 
@@ -217,16 +247,30 @@ public class MainActivity extends AppCompatActivity {
         oper2 = 0.0;
         result = 0.0;
         acumul = "";
-        flagEqual = 0;
+        flagEqual = false;
+        flagDot=false;
         editorTexto.setText(texto);
     }
 
     public void writeBdivide(View view) {
-        acumul="";
         if (!(texto.equals(""))&&!(prevDigit.equals("+"))&&!(prevDigit.equals("-"))&&!(prevDigit.equals("*"))&&!(prevDigit.equals("/"))&&!(prevDigit.equals("."))){
             texto += "/";
             prevDigit="/";
+            flagDot=false;
+            operation="div";
+            if(flagEqual) {
+                oper2=Double.parseDouble(acumul);
+                result=oper1/oper2;
+                texto=Double.toString(result);
+                texto+="/";
+                oper1=result;
+            }
+            else{
+                oper1 = Double.parseDouble(acumul);
+            }
             editorTexto.setText(texto);
+            flagEqual=true;
+            acumul="";
         }
     }
 
@@ -234,11 +278,34 @@ public class MainActivity extends AppCompatActivity {
         if (!(texto.equals(""))&&!(prevDigit.equals("+"))&&!(prevDigit.equals("-"))&&!(prevDigit.equals("*"))&&!(prevDigit.equals("/"))&&!(prevDigit.equals("."))&&!(prevDigit.equals("="))) {
             prevDigit="=";
             oper2=Double.parseDouble(acumul);
-            result=oper1+oper2;
-            texto=Double.toString(result);
+            if(operation.equals("sum")){
+                result=oper1+oper2;
+                texto=Double.toString(result);
+            }
+            if(operation.equals("sus")){
+                result=oper1-oper2;
+                texto=Double.toString(result);
+
+            }
+            if(operation.equals("mul")){
+                result=oper1*oper2;
+                texto=Double.toString(result);
+            }
+            if(operation.equals("div")) {
+                if (oper2 == 0.0) {
+                    texto = "Math Error";
+                }else
+                    result = oper1 / oper2;
+                    texto=Double.toString(result);
+            }
             editorTexto.setText(texto);
-            acumul=texto;
-            flagEqual=0;
+            if (texto.equals("Math Error")) {
+                acumul = "0";
+            }else
+                acumul=texto;
+            flagEqual=false;
+            flagDot=false;
+            operation="";
         }
     }
 }
