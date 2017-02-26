@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private String operation="";
     private Boolean flagDot=false;
     private Boolean flagEqual=false;
+    private Boolean flagError=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
             oper1 = 0.0;
             oper2 = 0.0;
             result = 0.0;
+            flagError=false;
         }
         texto += "7";
         prevDigit="7";
@@ -45,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
             oper1 = 0.0;
             oper2 = 0.0;
             result = 0.0;
+            flagError=false;
         }
         texto += "8";
         prevDigit="8";
@@ -59,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
             oper1 = 0.0;
             oper2 = 0.0;
             result = 0.0;
+            flagError=false;
         }
         texto += "9";
         prevDigit="9";
@@ -67,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void writeBplus(View view) {
-        if (!(texto.equals(""))&&!(prevDigit.equals("+"))&&!(prevDigit.equals("-"))&&!(prevDigit.equals("*"))&&!(prevDigit.equals("/"))&&!(prevDigit.equals("."))){
+        if (!(texto.equals(""))&&!(prevDigit.equals("+"))&&!(prevDigit.equals("-"))&&!(prevDigit.equals("*"))&&!(prevDigit.equals("/"))&&!(prevDigit.equals("."))&&!flagError){
             texto += "+";
             prevDigit="+";
             flagDot=false;
@@ -95,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
             oper1 = 0.0;
             oper2 = 0.0;
             result = 0.0;
+            flagError=false;
         }
         texto += "4";
         prevDigit="4";
@@ -109,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
             oper1 = 0.0;
             oper2 = 0.0;
             result = 0.0;
+            flagError=false;
         }
         texto += "5";
         prevDigit="5";
@@ -123,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
             oper1 = 0.0;
             oper2 = 0.0;
             result = 0.0;
+            flagError=false;
         }
         texto += "6";
         prevDigit="6";
@@ -131,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void writeBsustract(View view) {
-        if (!(texto.equals(""))&&!(prevDigit.equals("+"))&&!(prevDigit.equals("-"))&&!(prevDigit.equals("*"))&&!(prevDigit.equals("/"))&&!(prevDigit.equals("."))) {
+        if (!(texto.equals(""))&&!(prevDigit.equals("+"))&&!(prevDigit.equals("-"))&&!(prevDigit.equals("*"))&&!(prevDigit.equals("/"))&&!(prevDigit.equals("."))&&!flagError) {
             texto += "-";
             prevDigit="-";
             flagDot=false;
@@ -159,6 +166,7 @@ public class MainActivity extends AppCompatActivity {
             oper1 = 0.0;
             oper2 = 0.0;
             result = 0.0;
+            flagError=false;
         }
         texto += "1";
         prevDigit="1";
@@ -173,6 +181,7 @@ public class MainActivity extends AppCompatActivity {
             oper1 = 0.0;
             oper2 = 0.0;
             result = 0.0;
+            flagError=false;
         }
         texto += "2";
         prevDigit="2";
@@ -187,6 +196,7 @@ public class MainActivity extends AppCompatActivity {
             oper1 = 0.0;
             oper2 = 0.0;
             result = 0.0;
+            flagError=false;
         }
         texto += "3";
         prevDigit="3";
@@ -195,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void writeBmulti(View view) {
-        if (!(texto.equals(""))&&!(prevDigit.equals("+"))&&!(prevDigit.equals("-"))&&!(prevDigit.equals("*"))&&!(prevDigit.equals("/"))&&!(prevDigit.equals("."))) {
+        if (!(texto.equals(""))&&!(prevDigit.equals("+"))&&!(prevDigit.equals("-"))&&!(prevDigit.equals("*"))&&!(prevDigit.equals("/"))&&!(prevDigit.equals("."))&&!flagError) {
             texto += "*";
             prevDigit="*";
             flagDot=false;
@@ -217,7 +227,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void writeBdot(View view) {
-        if(!(prevDigit.equals("."))&&!flagDot) {
+        if(!(prevDigit.equals("."))&&!flagDot&&!flagError) {
             texto += ".";
             prevDigit = ".";
             acumul += ".";
@@ -233,6 +243,7 @@ public class MainActivity extends AppCompatActivity {
             oper1 = 0.0;
             oper2 = 0.0;
             result = 0.0;
+            flagError=false;
         }
             texto += "0";
             prevDigit = "0";
@@ -249,11 +260,12 @@ public class MainActivity extends AppCompatActivity {
         acumul = "";
         flagEqual = false;
         flagDot=false;
+        flagError=false;
         editorTexto.setText(texto);
     }
 
     public void writeBdivide(View view) {
-        if (!(texto.equals(""))&&!(prevDigit.equals("+"))&&!(prevDigit.equals("-"))&&!(prevDigit.equals("*"))&&!(prevDigit.equals("/"))&&!(prevDigit.equals("."))){
+        if (!(texto.equals(""))&&!(prevDigit.equals("+"))&&!(prevDigit.equals("-"))&&!(prevDigit.equals("*"))&&!(prevDigit.equals("/"))&&!(prevDigit.equals("."))&&!flagError){
             texto += "/";
             prevDigit="/";
             flagDot=false;
@@ -275,34 +287,36 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void writeBequal(View view) {
-        if (!(texto.equals(""))&&!(prevDigit.equals("+"))&&!(prevDigit.equals("-"))&&!(prevDigit.equals("*"))&&!(prevDigit.equals("/"))&&!(prevDigit.equals("."))&&!(prevDigit.equals("="))) {
+        if (!(texto.equals(""))&&!(prevDigit.equals("+"))&&!(prevDigit.equals("-"))&&!(prevDigit.equals("*"))&&!(prevDigit.equals("/"))&&!(prevDigit.equals("."))&&!(prevDigit.equals("="))&&!flagError) {
             prevDigit="=";
             oper2=Double.parseDouble(acumul);
             if(operation.equals("sum")){
                 result=oper1+oper2;
                 texto=Double.toString(result);
+                acumul = texto;
             }
-            if(operation.equals("sus")){
+            else if(operation.equals("sus")){
                 result=oper1-oper2;
                 texto=Double.toString(result);
-
+                acumul = texto;
             }
-            if(operation.equals("mul")){
+            else if(operation.equals("mul")){
                 result=oper1*oper2;
                 texto=Double.toString(result);
+                acumul = texto;
             }
-            if(operation.equals("div")) {
+            else if(operation.equals("div")) {
                 if (oper2 == 0.0) {
                     texto = "Math Error";
-                }else
+                    acumul = "0";
+                    flagError=true;
+                }else{
                     result = oper1 / oper2;
-                    texto=Double.toString(result);
+                    texto = Double.toString(result);
+                    acumul = texto;
+                }
             }
             editorTexto.setText(texto);
-            if (texto.equals("Math Error")) {
-                acumul = "0";
-            }else
-                acumul=texto;
             flagEqual=false;
             flagDot=false;
             operation="";
