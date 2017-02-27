@@ -38,7 +38,8 @@
             android:onClick="writeB9"/>
         <Button style="@style/ButtonStyle"
             android:text="+"
-            android:onClick="writeBplus"/>
+            android:onClick="writeBplus"
+            android:background="@color/darkslategray"/>
     </LinearLayout>
 
     <LinearLayout style="@style/LayoutStyle">
@@ -53,7 +54,8 @@
             android:onClick="writeB6"/>
         <Button style="@style/ButtonStyle"
             android:text="-"
-            android:onClick="writeBsustract"/>
+            android:onClick="writeBsustract"
+            android:background="@color/darkslategray"/>
     </LinearLayout>
 
     <LinearLayout style="@style/LayoutStyle">
@@ -68,7 +70,8 @@
             android:onClick="writeB3"/>
         <Button style="@style/ButtonStyle"
             android:text="*"
-            android:onClick="writeBmulti"/>
+            android:onClick="writeBmulti"
+            android:background="@color/darkslategray"/>
     </LinearLayout>
 
     <LinearLayout style="@style/LayoutStyle">
@@ -83,7 +86,8 @@
             android:onClick="writeBC"/>
         <Button style="@style/ButtonStyle"
             android:text="/"
-            android:onClick="writeBdivide"/>
+            android:onClick="writeBdivide"
+            android:background="@color/darkslategray"/>
     </LinearLayout>
 
     <LinearLayout
@@ -95,7 +99,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textColor="@color/white"
-            android:background="@color/seagreen"
+            android:background="@color/darkslategray"
             android:textSize="35sp"
             android:onClick="writeBequal"/>
     </LinearLayout>
